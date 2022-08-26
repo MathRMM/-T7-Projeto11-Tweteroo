@@ -35,7 +35,6 @@ server.get("/tweets", function (req, res) {
     if(!query||query<1){ res.status(400).send('Informe uma página válida!'); return}
     let numberTweets = 10 * query;
     GET_TWEETS(numberTweets);
-    console.log(query)
     res.send(allTweets);
 
 });
@@ -49,8 +48,8 @@ server.get("/tweets/:USERNAME", function (req, res) {
 // servidor POSTS
 server.post("/sign-up", function (req, res) {
     let userSingUp = req.body;
-    console.log(userSingUp)
-    if(userSingUp.username===''||userSingUp.avatar===''){
+    let conflict = user.find(value=>value.username===userSingUp.username)
+    if(userSingUp.username===''||userSingUp.avatar===''||conflict){
         res.sendStatus(400)
         return
     }

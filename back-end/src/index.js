@@ -53,7 +53,10 @@ server.post("/sign-up", function (req, res) {
         res.sendStatus(400)
         return
     }
-    user.push(userSingUp);
+    user.push({
+        id: user.length +1,
+        ...userSingUp
+    });
     res.status(201).send("OK");
 });
 server.post("/tweets", function (req, res) {
@@ -66,6 +69,7 @@ server.post("/tweets", function (req, res) {
     }
     tweets.push({
         username: _username,
+        id: tweets.length +1,
         ...newTweets,
     });
     res.status(201).send("OK");
